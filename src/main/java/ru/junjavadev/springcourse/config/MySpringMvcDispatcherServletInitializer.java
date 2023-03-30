@@ -1,4 +1,4 @@
-package ru.junjavadev.springcourse.congig;
+package ru.junjavadev.springcourse.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

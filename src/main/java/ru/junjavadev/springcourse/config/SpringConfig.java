@@ -1,4 +1,4 @@
-package ru.junjavadev.springcourse.congig;
+package ru.junjavadev.springcourse.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
