@@ -1,7 +1,7 @@
 package ru.junjavadev.springcourse.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,16 +13,28 @@ public class FirstController {
 
     @GetMapping("/hello")
     public String helloPage(@RequestParam(value = "name", required = false) String name,
-                            @RequestParam(value = "surname", required = false) String surname) {
-        System.out.println("Hello, " + name + " " + surname);
-        // Работаем с пришедшим от пользователя параметром
+                            @RequestParam(value = "surname", required = false) String surname,
+                            Model model) {
+
+        //System.out.println("Hello, " + name + " " + surname);
+        model.addAttribute("message", "Hello, " + name + " " + surname);
         return "first/hello";
     }
 
-    @GetMapping("/hello2")
-    public String helloPage(@RequestParam("name") String name) {
-        // Работаем с пришедшим от пользователя параметром
-        return "first/hello";
+    @GetMapping("/calculator")
+    public String calculate(@RequestParam("a") int a,
+                            @RequestParam("b") int b,
+                            @RequestParam("action") String action,
+                            Model model) {
+        double result = switch (action) {
+            case "multiplication" -> a * b;
+            case "addition" -> a + b;
+            case "subtraction" -> a - b;
+            case "division" -> a/(double)b;
+            default -> 0;
+        };
+        model.addAttribute("result", result);
+        return "first/calculator";
     }
 
     @GetMapping("/goodbye")
