@@ -1,15 +1,27 @@
 package ru.junjavadev.springcourse.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/first")
 public class FirstController {
 
+
     @GetMapping("/hello")
-    public String helloPage() {
+    public String helloPage(@RequestParam(value = "name", required = false) String name,
+                            @RequestParam(value = "surname", required = false) String surname) {
+        System.out.println("Hello, " + name + " " + surname);
+        // Работаем с пришедшим от пользователя параметром
+        return "first/hello";
+    }
+
+    @GetMapping("/hello2")
+    public String helloPage(@RequestParam("name") String name) {
+        // Работаем с пришедшим от пользователя параметром
         return "first/hello";
     }
 
